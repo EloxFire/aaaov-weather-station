@@ -12,3 +12,5 @@ while True :
     print("Humidity: {}%".format(humidity))
   except RuntimeError as e :
     print("Error: {}".format(e))
+
+  sleep(2)
