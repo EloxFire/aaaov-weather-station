@@ -15,21 +15,20 @@ import wind
 
 
 def main():
-    dht11.main()
-    bme280.main()
-    wind.main()
-    rainfall.main()
-
     while True:
-        print("Temperature: {}°C".format(dht11.temp))
-        print("Humidity: {}%".format(dht11.humidity))
-        print("BME280 Temperature: {}°C".format(bme280.T))
+        dht_temp, dht_humidity = dht11.read()
+        bme_temp = bme280.read_temperature()
+        wind_speed = wind.read_speed()
+        rain_count = rainfall.read_count()
 
-        print("Rainfall count: {}".format(rainfall.count))
-        print("Wind speed : {}".format(wind.speed))
+        print(f"Temperature: {dht_temp}°C")
+        print(f"Humidity: {dht_humidity}%")
+        print(f"BME280 Temperature: {bme_temp}°C")
+        print(f"Rainfall count: {rain_count}")
+        print(f"Wind speed: {wind_speed}")
+
         sleep(2)
 
+
 if __name__ == "__main__":
-    print("=== STATION MÉTÉO - AAAOV ===")
-    print("Initialisation...")
     main()

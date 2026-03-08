@@ -27,5 +27,9 @@ def calculate_rainfall():
 
 print("Init rain sensor...")
 rain_sensor = Button(6) 
-rain_sensor.when_pressed = bucket_tipped
 print("Rain sensor initialized.")
+
+while True:
+  reset_rainfall()
+  rain_sensor.when_pressed = bucket_tipped
+  
