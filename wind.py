@@ -8,38 +8,13 @@
 # =========
 
 from gpiozero import Button
-from signal import pause
-import time
 
-pulse_count = 0
-start_time = time.time()
+WIND_SENSOR = Button(5)
+wind_count = 0
 
-# Reed switch entre GPIO 5 et GND
-# pull_up=True par défaut
-# bounce_time en secondes
-anemometer = Button(5, pull_up=True, bounce_time=0.005)
+def spin():
+  global wind_count
+  wind_count = wind_count + 1
+  print("Spin detected : " + str(wind_count))
 
-def count_pulse():
-    global pulse_count
-    pulse_count += 1
-
-anemometer.when_pressed = count_pulse
-
-try:
-    while True:
-        time.sleep(2)
-        elapsed = time.time() - start_time
-        count = pulse_count
-
-        # remise à zéro pour la fenêtre suivante
-        pulse_count = 0
-        start_time = time.time()
-
-        freq_hz = count / elapsed
-        print(f"Impulsions: {count} en {elapsed:.2f}s | fréquence: {freq_hz:.2f} Hz")
-
-        # Exemple générique :
-        # vitesse = freq_hz * FACTEUR_CAPTEUR
-        # Remplace FACTEUR_CAPTEUR par la constante de ton modèle
-except KeyboardInterrupt:
-    pass
+WIND_SENSOR.when_pressed = spin
