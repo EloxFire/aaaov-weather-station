@@ -27,7 +27,7 @@ anemometer.when_pressed = count_pulse
 
 try:
     while True:
-        time.sleep(5)
+        time.sleep(2)
         elapsed = time.time() - start_time
         count = pulse_count
 
