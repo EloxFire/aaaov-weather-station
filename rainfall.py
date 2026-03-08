@@ -16,6 +16,7 @@ def bucket_tipped():
   global count
   count = count + 1
   print("Rain bucket tipped. Total count:", count)
+  print("Quantity of rain:", calculate_rainfall(), "mm")
 
 def reset_rainfall():
   global count
