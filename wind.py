@@ -9,7 +9,7 @@
 
 from gpiozero import Button
 
-WIND_SENSOR = Button(5)
+wind_sensor = Button(5)
 wind_count = 0
 
 def spin():
@@ -17,4 +17,4 @@ def spin():
   wind_count = wind_count + 1
   print("Spin detected : " + str(wind_count))
 
-WIND_SENSOR.when_pressed = spin
+wind_sensor.when_pressed = spin
