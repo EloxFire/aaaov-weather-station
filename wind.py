@@ -7,29 +7,39 @@
 # Contact AAAOV : contact@aaaov.fr
 # =========
 
-from time import sleep
-
-import RPi.GPIO as GPIO
+from gpiozero import Button
+from signal import pause
 import time
 
-print("Init wind sensor...")
-# Set up GPIO
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # Use GPIO 5, pull-down resistor
+pulse_count = 0
+start_time = time.time()
 
-count = 0
+# Reed switch entre GPIO 5 et GND
+# pull_up=True par défaut
+# bounce_time en secondes
+anemometer = Button(5, pull_up=True, bounce_time=0.005)
 
-def count_pulse(channel):
-    global count
-    count += 1
-    print(f"Pulse count: {count}")
+def count_pulse():
+    global pulse_count
+    pulse_count += 1
 
-# Add event detection on rising edge (switch opens)
-GPIO.add_event_detect(5, GPIO.RISING, callback=count_pulse, bouncetime=50)
+anemometer.when_pressed = count_pulse
 
 try:
     while True:
-        time.sleep(1)  # Keep script running
+        time.sleep(5)
+        elapsed = time.time() - start_time
+        count = pulse_count
+
+        # remise à zéro pour la fenêtre suivante
+        pulse_count = 0
+        start_time = time.time()
+
+        freq_hz = count / elapsed
+        print(f"Impulsions: {count} en {elapsed:.2f}s | fréquence: {freq_hz:.2f} Hz")
+
+        # Exemple générique :
+        # vitesse = freq_hz * FACTEUR_CAPTEUR
+        # Remplace FACTEUR_CAPTEUR par la constante de ton modèle
 except KeyboardInterrupt:
-    print(f"Final count: {count}")
-    GPIO.cleanup()
+    pass
