@@ -26,6 +26,6 @@ def calculate_rainfall():
   return count * bucket_size
 
 print("Init rain sensor...")
-rain_sensor = Button(5) # TODO: CHANGE PIN 
+rain_sensor = Button(6) 
 rain_sensor.when_pressed = bucket_tipped
 print("Rain sensor initialized.")
