@@ -1,3 +1,9 @@
+# =========
+# SATTION METEO AAAOV
+# dht11.py
+# Ce fichier permet de lire les valeurs de température et d'humidité du capteur DHT11
+# =========
+
 import board
 import adafruit_dht
 from time import sleep
