@@ -31,6 +31,5 @@ rain_sensor = Button(6)
 print("Rain sensor initialized.")
 
 while True:
-  reset_rainfall()
   rain_sensor.when_pressed = bucket_tipped
   
