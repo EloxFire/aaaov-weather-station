@@ -24,7 +24,7 @@ def reset_rainfall():
 
 def calculate_rainfall():
   global count
-  return count * bucket_size
+  return round((count * bucket_size), 2)
 
 print("Init rain sensor...")
 rain_sensor = Button(6) 
