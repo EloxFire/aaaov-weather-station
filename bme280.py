@@ -2,10 +2,14 @@
 # STATION METEO AAAOV
 # bme280.py
 # Ce fichier permet de lire les valeurs de température, humidité et pression du capteur BME280
+# Enzo Avagliano - contact@enzoavagliano.fr
+# Contact AAAOV : contact@aaaov.fr
 # =========
 
 import smbus
 from time import sleep
+
+print("Init BME280 sensor...")
 
 # BMP280 I2C address
 bmp_addr = 0x77
@@ -19,6 +23,8 @@ i2c.write_byte_data(bmp_addr, 0xf5, (5<<5))
 i2c.write_byte_data(bmp_addr, 0xf4, ((5<<5) | (3<<0)))
 
 # Sensor is set up and will do a measurement every 1s
+
+print("BME280 sensor initialized.")
 
 dig_T1 = i2c.read_word_data(bmp_addr, 0x88)
 dig_T2 = i2c.read_word_data(bmp_addr, 0x8A)
