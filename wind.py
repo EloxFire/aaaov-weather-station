@@ -17,4 +17,5 @@ def spin():
   wind_count = wind_count + 1
   print("Spin detected : " + str(wind_count))
 
-wind_sensor.when_pressed = spin
+while True :
+  wind_sensor.when_pressed = spin
