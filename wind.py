@@ -15,6 +15,7 @@ sensor_radius_cm = 9.0 # Rayon du capteur en cm
 read_interval = 5 # Intervale de mesure en s
 wind_count = 0 # Nombre de demi-rotations
 adjustment_factor = 1.8 # Facteur d'ajustement pour compenser l'energie perdue dans la rotation des bras
+speed = 0.0 # Vitesse du vent en km/h
 
 def spin():
   global wind_count
@@ -28,7 +29,7 @@ def calculate_wind_speed(interval):
   cup_distance = circumference_cm * rotations
   # Calcul vitesse
   wind_speed = ((cup_distance / interval) / 100) * 3.6 # Convertion en km/h
-  return wind_speed * adjustment_factor
+  return round(wind_speed * adjustment_factor, 2)
 
 def reset_wind():
   global wind_count
@@ -43,5 +44,6 @@ print("Anemometer initialized.")
 while True :
   reset_wind()
   sleep(read_interval)
-  print("Wind speed:", calculate_wind_speed(read_interval), "km/h")
+  speed = calculate_wind_speed(read_interval)
+#   print("Wind speed:", calculate_wind_speed(read_interval), "km/h")
   
